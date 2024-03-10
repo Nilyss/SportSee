@@ -2,7 +2,7 @@
 import './home.scss'
 
 // types
-import {  ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { IUserContext } from '../../context/UserContext.tsx'
 import { NavigateFunction } from 'react-router-dom'
 
@@ -13,6 +13,10 @@ import { UserContext } from '../../context/UserContext.tsx'
 import { useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+// components
+import Header from '../../components/header/Header.tsx'
+import Aside from '../../components/aside/Aside.tsx'
+
 export default function Home(): ReactElement {
   const {
     getUser,
@@ -22,31 +26,40 @@ export default function Home(): ReactElement {
     getUserAverageSessions,
     averageSessions,
     getUserPerformance,
-    performance
+    performance,
   }: IUserContext = useContext(UserContext)
   const userID: string | undefined = useParams().id
   const navigate: NavigateFunction = useNavigate()
 
   useEffect((): void => {
     async function getUserDatas(userID: string): Promise<void> {
-        await getUser(userID)
-        if (user) {
-          await getUserActivity(userID)
-          await getUserAverageSessions(userID)
-          await getUserPerformance(userID)
-        } else {
-          navigate('/login')
-        }
+      await getUser(userID)
+      if (user) {
+        await getUserActivity(userID)
+        await getUserAverageSessions(userID)
+        await getUserPerformance(userID)
+      } else {
+        navigate('/login')
       }
+    }
     userID && getUserDatas(userID)
   }, [])
 
   return (
-    <main className={'home'}>
-      <h1>{user?.userInfos.firstName}</h1>
-      <h2>{activity?.sessions[0].day}</h2>
-      <h2>{averageSessions?.sessions[0].sessionLength}</h2>
-      <h2>{performance?.data[0].value}</h2>
-    </main>
+    <>
+      <Header />
+      <main className={'home'}>
+        <Aside />
+        <article>
+          <div>
+            <h1>
+              Bonjour{' '}
+              <span className={'titleColor'}>{user?.userInfos.firstName}</span>
+            </h1>
+            <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+          </div>
+        </article>
+      </main>
+    </>
   )
 }
