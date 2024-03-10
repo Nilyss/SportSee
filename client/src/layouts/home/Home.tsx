@@ -16,6 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 // components
 import Header from '../../components/header/Header.tsx'
 import Aside from '../../components/aside/Aside.tsx'
+import BarChart from '../../components/barChart/BarChart.tsx'
 
 export default function Home(): ReactElement {
   const {
@@ -51,13 +52,16 @@ export default function Home(): ReactElement {
       <main className={'home'}>
         <Aside />
         <article>
-          <div>
+          <section>
             <h1>
               Bonjour{' '}
               <span className={'titleColor'}>{user?.userInfos.firstName}</span>
             </h1>
             <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
-          </div>
+          </section>
+          <section>
+            <BarChart data={activity} />
+          </section>
         </article>
       </main>
     </>
