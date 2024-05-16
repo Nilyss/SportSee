@@ -12,21 +12,19 @@ import {
   Navigate,
 } from 'react-router-dom'
 
-// context
-import { UserContext } from './context/UserContext'
 
 // layout
 import Landing from './layouts/landing/Landing'
+import Home from './layouts/home/Home'
 
 function App(): ReactElement {
-  // get current hour and minutes
-
 
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path={'/login'} element={<Landing />} />
+        <Route path={'/home/:id'} element={<Home  />} />
       </Routes>
     </Router>
   )
