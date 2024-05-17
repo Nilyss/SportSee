@@ -1,30 +1,51 @@
-// types
-import {  AxiosResponse } from 'axios'
+import {
+  fetchUserInfo,
+  fetchUserActivity,
+  fetchUserAverageSession,
+  fetchUserPerformance,
+} from '../APICalls'
+import {
+  UserModel,
+  UserInfos,
+  UserActivity,
+  UserAverageSession,
+  UserPerformance,
+} from '../models/UserModels'
 
-// query
-import { getRequest } from '../APICalls.ts'
+interface APIResponse<T> {
+  data: T
+}
 
-// models
-import { ActivityModel, AverageSessionsModel, PerformanceModel, UserModel } from '../models/UserModels.ts'
+const mapUserData = (
+  userInfo: APIResponse<UserInfos>,
+  userActivity: APIResponse<UserActivity>,
+  userAverageSession: APIResponse<UserAverageSession>,
+  userPerformance: APIResponse<UserPerformance>,
+): UserModel => ({
+  userInfos: userInfo.data,
+  userActivity: userActivity.data,
+  userAverageSession: userAverageSession.data,
+  userPerformance: userPerformance.data,
+})
 
-export default class UserServices {
-  async getUser(id: string): Promise<UserModel> {
-    const res: AxiosResponse = await getRequest(`/user/${id}`)
-    return new UserModel(res.data)
-  }
+export const getUserData = async (userId: string): Promise<UserModel> => {
+  try {
+    const [userInfo, userActivity, userAverageSession, userPerformance] =
+      await Promise.all([
+        fetchUserInfo(userId),
+        fetchUserActivity(userId),
+        fetchUserAverageSession(userId),
+        fetchUserPerformance(userId),
+      ])
 
-  async getUserActivity(id: string): Promise<ActivityModel> {
-    const res: AxiosResponse = await getRequest(`/user/${id}/activity`)
-    return new ActivityModel(res.data)
-  }
-
-  async getUserAverageSessions(id: string): Promise<AverageSessionsModel> {
-    const res: AxiosResponse = await getRequest(`/user/${id}/average-sessions`)
-    return new AverageSessionsModel(res.data)
-  }
-
-  async getUserPerformance(id: string): Promise<PerformanceModel> {
-    const res: AxiosResponse = await getRequest(`/user/${id}/performance`)
-    return new PerformanceModel(res.data)
+    return mapUserData(
+      userInfo,
+      userActivity,
+      userAverageSession,
+      userPerformance,
+    )
+  } catch (error) {
+    console.error(`Error getting user data with ID ${userId}:`, error)
+    throw error
   }
 }

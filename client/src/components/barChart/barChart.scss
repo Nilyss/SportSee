@@ -1,0 +1,35 @@
+#barChart {
+  display: flex;
+  flex-direction: column;
+  width: 52rem;
+  height: 20rem;
+  border-radius: 5px;
+  background: #FBFBFB;
+}
+
+#barChart h2 {
+  color: #20253A;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  position: relative;
+  top: 7px;
+  left: 15px;
+}
+
+.legend-item-0 {
+ margin-right:32px !important;
+}
+
+.recharts-legend-item-text {
+  margin-left: 10px;
+}
+
+.recharts-cartesian-axis-line {
+
+}
+
+.recharts-cartesian-axis-tick-line {
+  display: none;
+}

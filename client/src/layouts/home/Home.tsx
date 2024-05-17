@@ -19,31 +19,19 @@ import Aside from '../../components/aside/Aside.tsx'
 import BarChart from '../../components/barChart/BarChart.tsx'
 
 export default function Home(): ReactElement {
-  const {
-    getUser,
-    user,
-    getUserActivity,
-    activity,
-    getUserAverageSessions,
-    averageSessions,
-    getUserPerformance,
-    performance,
-  }: IUserContext = useContext(UserContext)
+  const { getUser, user }: IUserContext = useContext(UserContext)
   const userID: string | undefined = useParams().id
   const navigate: NavigateFunction = useNavigate()
 
   useEffect((): void => {
     async function getUserDatas(userID: string): Promise<void> {
       await getUser(userID)
-      if (user) {
-        await getUserActivity(userID)
-        await getUserAverageSessions(userID)
-        await getUserPerformance(userID)
-      } else {
+      if (!user) {
         navigate('/login')
       }
     }
     userID && getUserDatas(userID)
+    console.log('user —>', user)
   }, [])
 
   return (
@@ -55,13 +43,13 @@ export default function Home(): ReactElement {
           <section>
             <h1>
               Bonjour{' '}
-              <span className={'titleColor'}>{user?.userInfos.firstName}</span>
+              <span className={'titleColor'}>
+                {user?.userInfos.userInfos.firstName}
+              </span>
             </h1>
             <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
           </section>
-          <section>
-            <BarChart data={activity} />
-          </section>
+          <section>{<BarChart datas={user?.userActivity.sessions} />}</section>
         </article>
       </main>
     </>
