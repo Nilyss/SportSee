@@ -20,7 +20,7 @@ import BarChart from '../../components/barChart/BarChart.tsx'
 
 export default function Home(): ReactElement {
   const { getUser, user }: IUserContext = useContext(UserContext)
-  const userID: string | undefined = useParams().id
+  const userID: string = useParams().id!
   const navigate: NavigateFunction = useNavigate()
 
   useEffect((): void => {
@@ -31,7 +31,6 @@ export default function Home(): ReactElement {
       }
     }
     userID && getUserDatas(userID)
-    console.log('user —>', user)
   }, [])
 
   return (
@@ -49,7 +48,14 @@ export default function Home(): ReactElement {
             </h1>
             <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
           </section>
-          <section>{<BarChart datas={user?.userActivity.sessions} />}</section>
+          <section>
+            {' '}
+            {user?.userActivity.sessions ? (
+              <BarChart datas={user.userActivity.sessions} />
+            ) : (
+              <p>Aucune donnée disponible</p>
+            )}
+          </section>
         </article>
       </main>
     </>

@@ -5,6 +5,8 @@
   height: 20rem;
   border-radius: 5px;
   background: #FBFBFB;
+  padding: 24px;
+  padding-right: unset !important;
 }
 
 #barChart h2 {
@@ -26,8 +28,11 @@
   margin-left: 10px;
 }
 
-.recharts-cartesian-axis-line {
-
+.recharts-legend-item-text {
+  color: #74798C !important;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
 }
 
 .recharts-cartesian-axis-tick-line {

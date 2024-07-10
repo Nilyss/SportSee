@@ -16,22 +16,19 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
-interface BarChartData {
+interface IBarChartData {
   day: string
   kilogram: number
   calories: number
-  index: number
 }
 
-interface BarChartProps {
-  datas: BarChartData[] | undefined
-  index: number
+interface IBarChartProps {
+  datas: IBarChartData[]
 }
 
-export default function BarChart({ datas }: BarChartProps): ReactElement {
-  console.log('datas (barCharts) —>', datas)
+export default function BarChart({ datas }: IBarChartProps): ReactElement {
 
-  const transformedData = datas?.map((data: BarChartData, idx: number) => ({
+  const transformedData = datas?.map((data: IBarChartData, idx: number) => ({
     ...data,
     index: idx + 1,
   }))
@@ -65,19 +62,25 @@ export default function BarChart({ datas }: BarChartProps): ReactElement {
           data={transformedData}
           margin={{
             top: 0,
-            right: 0,
-            left: 0,
+            right: -40,
+            left: 20,
             bottom: 0,
           }}
           barCategoryGap="0%"
-          barGap={0}
+          barGap={8}
         >
           <CartesianGrid
             strokeDasharray="3 3"
             stroke="#dedede"
             vertical={false}
           />
-          <XAxis dataKey="index" padding={{ left: 0, right: 0 }} />
+          <XAxis
+            dataKey="index"
+            padding={{ left: 10, right: 10 }}
+            scale="point"
+            dy={10}
+            stroke='#9B9EAC'
+          />
           <YAxis
             yAxisId="left"
             orientation="right"
@@ -91,7 +94,7 @@ export default function BarChart({ datas }: BarChartProps): ReactElement {
           />
           <YAxis
             yAxisId="right"
-            orientation="left"
+            orientation="right"
             stroke="#9B9EAC"
             axisLine={false}
             tickLine={false}
