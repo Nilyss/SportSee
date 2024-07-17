@@ -4,6 +4,7 @@ import './barChart.scss'
 // types
 import { ReactElement } from 'react'
 
+// hooks | library
 import {
   BarChart as Chart,
   Bar,
@@ -48,7 +49,7 @@ export default function BarChart({ datas }: IBarChartProps): ReactElement {
   //   return null
   // }
 
-  const legendFormatter = (value: string) => {
+  const legendFormatter = (value: string): string => {
     if (value === 'kilogram') return 'Poids (kg)'
     if (value === 'calories') return 'Calories brûlées (kCal)'
     return value

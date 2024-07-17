@@ -17,6 +17,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../../components/header/Header.tsx'
 import Aside from '../../components/aside/Aside.tsx'
 import BarChart from '../../components/barChart/BarChart.tsx'
+import LineChart from '../../components/lineChart/LineChart.tsx'
 
 export default function Home(): ReactElement {
   const { getUser, user }: IUserContext = useContext(UserContext)
@@ -32,6 +33,10 @@ export default function Home(): ReactElement {
     }
     userID && getUserDatas(userID)
   }, [])
+
+  const EmptyMessage = (): ReactElement => {
+    return <p>Aucune donnée disponible</p>
+  }
 
   return (
     <>
@@ -49,11 +54,17 @@ export default function Home(): ReactElement {
             <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
           </section>
           <section>
-            {' '}
             {user?.userActivity.sessions ? (
               <BarChart datas={user.userActivity.sessions} />
             ) : (
-              <p>Aucune donnée disponible</p>
+              <EmptyMessage />
+            )}
+          </section>
+          <section>
+            {user?.userAverageSession.sessions ? (
+              <LineChart datas={user.userAverageSession.sessions} />
+            ) : (
+              <EmptyMessage />
             )}
           </section>
         </article>
