@@ -1,0 +1,35 @@
+#nutrition {
+  padding: unset;
+  width: 258px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#nutrition ul {
+  width: 100%;
+  padding-top: 234px;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column;
+  gap: 39px;
+}
+
+#nutrition .nutritionItem {
+  width: 258px;
+  display: flex;
+  align-items: center;
+  padding: 32px;
+  gap: 32px;
+  border-radius: 5px;
+  background: #fbfbfb;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+}
+
+#nutrition .nutritionItem figure {
+  width: 60px;
+  height: 60px;
+}
+
+#nutrition .nutritionItem figure img {
+  width: 100%
+}

@@ -65,8 +65,6 @@ const CustomizedCursor = ({ points }: CustomizedCursorProps): ReactElement => {
 }
 
 export default function LineChart({ datas }: ILineChartProps): ReactElement {
-  console.log('lineChart Datas —>', datas)
-
   const reformatedDay = (day: number): string => {
     const days: string[] = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
     return days[day - 1]
@@ -83,15 +81,13 @@ export default function LineChart({ datas }: ILineChartProps): ReactElement {
       <h2>Durée moyenne des sessions</h2>
       <ResponsiveContainer width={'100%'} height={'100%'}>
         <Chart
-          // width={500}
-          // height={500}
           data={transformedData}
-          // margin={{
-          //   top: 5,
-          //   right: 0,
-          //   left: 0,
-          //   bottom: 5,
-          // }}
+          margin={{
+            top: 20,
+            right: 0,
+            left: 0,
+            bottom: 15,
+          }}
         >
           <defs>
             <linearGradient
@@ -111,9 +107,10 @@ export default function LineChart({ datas }: ILineChartProps): ReactElement {
             </linearGradient>
           </defs>
           <XAxis
+            className="lineXAxis"
             dataKey="day"
             stroke="#ffffff81"
-            padding={{ left: -15, right: -15 }}
+            padding={{ left: 4.4, right: 0 }}
             axisLine={false}
             tickLine={false}
           ></XAxis>

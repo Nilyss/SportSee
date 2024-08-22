@@ -1,0 +1,28 @@
+#radarChart {
+  width: 16rem;
+  height: 16.5rem;
+  background: #282d30;
+  border-radius: 5px;
+}
+
+.recharts-polar-angle-axis-tick {
+  &:nth-child(1) {
+    transform: translateY(-0.5rem);
+  }
+
+  &:nth-child(3) {
+    transform: translateX(0.1rem) translateY(0.5rem);
+  }
+
+  &:nth-child(4) {
+    transform: translateY(0.8rem);
+  }
+
+  &:nth-child(5) {
+    transform: translateX(-0.2rem) translateY(0.4rem);
+  }
+
+  &:nth-child(6) {
+    transform: translateY(-0.2rem) translateX(-0.2rem);
+  }
+}

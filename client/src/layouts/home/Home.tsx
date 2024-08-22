@@ -18,6 +18,9 @@ import Header from '../../components/header/Header.tsx'
 import Aside from '../../components/aside/Aside.tsx'
 import BarChart from '../../components/barChart/BarChart.tsx'
 import LineChart from '../../components/lineChart/LineChart.tsx'
+import RadarChart from '../../components/radarChart/RadarChart.tsx'
+import RadialBarChart from '../../components/radialBarChart/RadialBarChart.tsx'
+import Nutrition from '../../components/nutrition/Nutrition.tsx'
 
 export default function Home(): ReactElement {
   const { getUser, user }: IUserContext = useContext(UserContext)
@@ -38,6 +41,7 @@ export default function Home(): ReactElement {
     return <p>Aucune donnée disponible</p>
   }
 
+  console.log('Datas —>', user)
   return (
     <>
       <Header />
@@ -60,13 +64,39 @@ export default function Home(): ReactElement {
               <EmptyMessage />
             )}
           </section>
-          <section>
-            {user?.userAverageSession.sessions ? (
-              <LineChart datas={user.userAverageSession.sessions} />
-            ) : (
-              <EmptyMessage />
-            )}
-          </section>
+          <div className={'card'}>
+            <section>
+              {user?.userAverageSession.sessions ? (
+                <LineChart datas={user.userAverageSession.sessions} />
+              ) : (
+                <EmptyMessage />
+              )}
+            </section>
+            <section>
+              {user?.userPerformance.data ? (
+                <RadarChart datas={user.userPerformance.data} />
+              ) : (
+                <EmptyMessage />
+              )}
+            </section>
+            <section>
+              {user ? (
+                <RadialBarChart datas={user.userInfos} />
+              ) : (
+                <EmptyMessage />
+              )}
+            </section>
+          </div>
+        </article>
+        <article id={'nutrition'}>
+          <ul>
+            {user?.userInfos.keyData &&
+              Object.entries(user.userInfos.keyData).map(
+                ([key, value]: [string, number]) => {
+                  return <Nutrition key={key} type={key} value={value} />
+                },
+              )}
+          </ul>
         </article>
       </main>
     </>
