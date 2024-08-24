@@ -20,29 +20,51 @@ export default function Nutrition({
   value,
 }: INutritionProps): ReactElement {
   let icon: string = ''
+  let unit: string = ''
+  let label: string = ''
+
   switch (type) {
     case 'calorieCount':
       icon = calIcon
+      unit = 'kCal'
+      label = 'Calories'
       break
     case 'proteinCount':
       icon = protIcon
+      unit = 'g'
+      label = 'Proteines'
       break
     case 'carbohydrateCount':
       icon = carbIcon
+      unit = 'g'
+      label = 'Glucides'
       break
     case 'lipidCount':
       icon = fatIcon
+      unit = 'g'
+      label = 'Lipides'
       break
     default:
       break
   }
 
+  const reformatValue = (value: number) => {
+    const updatedValue = (value / 1000).toFixed(3)
+    return updatedValue.replace('.', ',')
+  }
+
   return (
-    <li className={"nutritionItem"}>
+    <li className={'nutritionItem'}>
       <figure>
         <img src={icon} alt={type} />
       </figure>
-      <p>{value}</p>
+      <div className={'nutritionItemValues'}>
+        <p>
+          {value && value >= 1000 ? reformatValue(value) : value}
+          {unit}
+        </p>
+        <p>{label}</p>
+      </div>
     </li>
   )
 }
