@@ -1,0 +1,61 @@
+#lineChart {
+  width: 16rem;
+  height: 16.5rem;
+  background: #f00;
+  border-radius: 5px;
+  position: relative;
+}
+
+#lineChart h2 {
+  color: #fff;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  position: absolute;
+  top: 29px;
+  left: 34px;
+  width: 150px;
+  z-index: 9999;
+  opacity: 0.504;
+}
+
+.custom-tooltip-sessions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 0.75rem;
+  width: 39px;
+  height: 25px;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.recharts-tooltip-wrapper p {
+  position: absolute;
+  bottom: 0;
+  color: #000000;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.recharts-cartesian-axis-tick .custom-tick {
+  fill: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.sessions-custom-legend {
+  color: #ffffff;
+  font-size: 15px;
+  opacity: 0.5039569735527039;
+}
+
+
+.lineXAxis {
+  transform: scale(0.85);
+  translate: 1.2em 2.5em !important;
+}

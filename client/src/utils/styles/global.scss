@@ -1,0 +1,30 @@
+// ********** GLOBAL SCSS FILE **********
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+// RESET STYLES
+html,
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  cursor: default;
+}
+
+a:hover    {
+  cursor: pointer;
+}
+
+body {
+  max-width: 1440px;
+  min-width: 1440px;
+  max-height: 1024px;
+  min-height: 1024px;
+  margin: auto;
+}
+
+li {
+  list-style: none;
+}
