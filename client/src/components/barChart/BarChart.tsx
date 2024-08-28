@@ -12,7 +12,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  // TooltipProps,
+  TooltipProps,
   Legend,
   ResponsiveContainer,
 } from 'recharts'
@@ -28,26 +28,25 @@ interface IBarChartProps {
 }
 
 export default function BarChart({ datas }: IBarChartProps): ReactElement {
-
   const transformedData = datas?.map((data: IBarChartData, idx: number) => ({
     ...data,
     index: idx + 1,
   }))
 
-  // const CustomToolTip = ({
-  //   active,
-  //   payload,
-  // }: TooltipProps<number, string>): ReactElement | null => {
-  //   if (active && payload) {
-  //     return (
-  //       <div className="custom-tooltip">
-  //         <p className="label">{`${payload[0].value} kg`}</p>
-  //         <p className="label">{`${payload[1].value} kCal`}</p>
-  //       </div>
-  //     )
-  //   }
-  //   return null
-  // }
+  const CustomToolTip = ({
+    active,
+    payload,
+  }: TooltipProps<number, string>): ReactElement | null => {
+    if (active && payload) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${payload[0].value} kg`}</p>
+          <p className="desc">{`${payload[1].value} kCal`}</p>
+        </div>
+      )
+    }
+    return null
+  }
 
   const legendFormatter = (value: string): string => {
     if (value === 'kilogram') return 'Poids (kg)'
@@ -80,7 +79,7 @@ export default function BarChart({ datas }: IBarChartProps): ReactElement {
             padding={{ left: 10, right: 10 }}
             scale="point"
             dy={10}
-            stroke='#9B9EAC'
+            stroke="#9B9EAC"
           />
           <YAxis
             yAxisId="left"
@@ -104,7 +103,7 @@ export default function BarChart({ datas }: IBarChartProps): ReactElement {
           />
           <Tooltip
             allowEscapeViewBox={{ x: true, y: true }}
-            // content={<CustomToolTip />} //
+            content={<CustomToolTip />}
           />
           <Legend
             verticalAlign="top"

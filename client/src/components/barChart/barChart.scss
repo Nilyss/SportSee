@@ -40,3 +40,36 @@
 .recharts-cartesian-axis-tick-line {
   display: none;
 }
+
+#barChart .custom-tooltip {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 3.5rem;
+  height: 6rem;
+  background-color: #E60000;
+  position: relative;
+}
+
+#barChart .custom-tooltip .label,
+#barChart .custom-tooltip .desc{
+  color: #FFF !important;
+  text-align: center !important;
+  font-size: 7px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 24px !important;
+  width: 100%;
+}
+
+#barChart .custom-tooltip .label {
+  position: absolute;
+  top: -25px;
+  left: 0;
+}
+
+#barChart .custom-tooltip .desc {
+  position: absolute;
+  top: 15px;
+  left: 0;
+}
