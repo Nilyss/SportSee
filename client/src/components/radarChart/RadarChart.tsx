@@ -63,7 +63,7 @@ export default function RadarChart({ datas }: IRadarChartProps): ReactElement {
         <Chart
           outerRadius="80%"
           data={data}
-          margin={{ top: 25, right: 25, bottom: 25, left: 25 }}
+          margin={{ top: 35, right: 35, bottom: 35, left: 35 }}
         >
           <PolarGrid radialLines={false} />
           <PolarAngleAxis

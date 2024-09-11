@@ -7,6 +7,9 @@ header {
 }
 
 header nav {
+  @media (max-width: 1024px) {
+    gap: 75px;
+  }
   display: flex;
   align-items: center;
   justify-content: center;

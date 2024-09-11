@@ -9,6 +9,11 @@
   background: #fbfbfb;
   padding: 24px;
   padding-right: unset !important;
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+    width: 39.6rem;
+    height: 15rem;
+  }
 }
 
 #barChart h2 {

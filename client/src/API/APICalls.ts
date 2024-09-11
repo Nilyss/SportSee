@@ -1,3 +1,5 @@
+import { isOnProduction } from '../utils/scripts/utils.ts'
+
 import axios from 'axios'
 import {
   UserInfos,
@@ -7,7 +9,7 @@ import {
 } from './models/UserModels'
 
 // axios setup
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = isOnProduction ? 'http://localhost:3000' : ''
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.timeout = 6000
 //axios.defaults.withCredentials = true
@@ -17,8 +19,10 @@ axios.defaults.timeout = 6000
 export const fetchUserInfo = async (
   userId: string,
 ): Promise<{ data: UserInfos }> => {
+  const userInfoEndpoint = isOnProduction ? `/user/${userId}` : '/userMainData.json'
+
   try {
-    const response = await axios.get<{ data: UserInfos }>(`/user/${userId}`)
+    const response = await axios.get<{ data: UserInfos }>(userInfoEndpoint)
     return response.data
   } catch (error) {
     console.error(`Error fetching user info with ID ${userId}:`, error)
@@ -29,9 +33,12 @@ export const fetchUserInfo = async (
 export const fetchUserActivity = async (
   userId: string,
 ): Promise<{ data: UserActivity }> => {
+  const userActivityEndpoint = isOnProduction
+    ? `/user/${userId}/activity`
+    : '/userActivity.json'
   try {
     const response = await axios.get<{ data: UserActivity }>(
-      `/user/${userId}/activity`,
+      userActivityEndpoint,
     )
     return response.data
   } catch (error) {
@@ -43,9 +50,12 @@ export const fetchUserActivity = async (
 export const fetchUserAverageSession = async (
   userId: string,
 ): Promise<{ data: UserAverageSession }> => {
+  const userAverageSessionEndpoint = isOnProduction
+    ? `/user/${userId}/average-sessions`
+    : '/userAverageSessions.json'
   try {
     const response = await axios.get<{ data: UserAverageSession }>(
-      `/user/${userId}/average-sessions`,
+      userAverageSessionEndpoint,
     )
     return response.data
   } catch (error) {
@@ -60,9 +70,12 @@ export const fetchUserAverageSession = async (
 export const fetchUserPerformance = async (
   userId: string,
 ): Promise<{ data: UserPerformance }> => {
+  const userPerformanceEndpoint = isOnProduction
+    ? `/user/${userId}/performance`
+    : '/userPerformance.json'
   try {
     const response = await axios.get<{ data: UserPerformance }>(
-      `/user/${userId}/performance`,
+      userPerformanceEndpoint,
     )
     return response.data
   } catch (error) {

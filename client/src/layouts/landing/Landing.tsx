@@ -1,6 +1,9 @@
 // styles
 import './landing.scss'
 
+// assets
+import brandingLogo from '../../assets/logos/SportSee.webp'
+
 // types
 import {
   FormEvent,
@@ -52,10 +55,15 @@ export default function Landing(): ReactElement {
 
   return (
     <main className={'landing'}>
-      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
+        <div className={'formHeader'}>
+          <figure>
+            <img src={brandingLogo} alt={'brandingLogo'} />
+          </figure>
+          <h1>Sign-in</h1>
+        </div>
         <div>
-          <label htmlFor={'userID'}>userID</label>
+          <label htmlFor={'userID'}>User ID</label>
           <input id={'userID'} type={'text'} ref={inputRef} />
           {errorMessage && <p className={'error'}>{errorMessage}</p>}
         </div>
