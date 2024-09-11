@@ -25,6 +25,7 @@ function App(): ReactElement {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path={'/login'} element={<Landing />} />
         <Route path={'/home/:id'} element={<Home  />} />
+        <Route path={'*'} element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   )

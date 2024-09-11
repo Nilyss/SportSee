@@ -1,4 +1,7 @@
 #nutrition {
+  @media (max-width: 1024px) {
+    width: 127px;
+  }
   padding: unset;
   width: 258px;
   display: flex;
@@ -7,6 +10,10 @@
 }
 
 #nutrition ul {
+  @media (max-width: 1024px) {
+    padding-top: 22px;
+    gap: 10px;
+  }
   width: 100%;
   padding-top: 234px;
   display: flex;
@@ -16,6 +23,12 @@
 }
 
 #nutrition .nutritionItem {
+  @media (max-width: 1024px) {
+    width: 127px;
+    flex-flow: column;
+    padding: 14px;
+    gap: 12px;
+  }
   width: 258px;
   display: flex;
   align-items: center;
@@ -33,6 +46,10 @@
 }
 
 #nutrition .nutritionItem figure {
+  @media (max-width: 1024px) {
+    width: 40px;
+    height: 40px;
+  }
   width: 60px;
   height: 60px;
 }
@@ -42,6 +59,10 @@
 }
 
 #nutrition .nutritionItem p:first-of-type {
+  @media (max-width: 1024px) {
+    font-size: 16px;
+    text-align: center;
+  }
   color: #282d30;
   font-size: 20px;
   font-style: normal;
@@ -50,6 +71,10 @@
 }
 
 #nutrition .nutritionItem p:last-of-type {
+  @media (max-width: 1024px) {
+    font-size: 12px;
+    text-align: center;
+  }
   color: #74798c;
   font-size: 14px;
   font-style: normal;
