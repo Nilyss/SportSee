@@ -9,10 +9,10 @@ import {
 } from './models/UserModels'
 
 // axios setup
-axios.defaults.baseURL = isOnProduction ? 'http://localhost:3000' : ''
+axios.defaults.baseURL = isOnProduction ? 'http://localhost:3000' : '' // let the string empty to use JSON in public folder
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.timeout = 6000
-//axios.defaults.withCredentials = true
+axios.defaults.withCredentials = !isOnProduction
 
 // *************** AXIOS REQUEST ***************
 

@@ -17,19 +17,26 @@ interface APIResponse<T> {
   data: T
 }
 
+const normalizeUserInfos = (userInfo: UserInfos): UserInfos => ({
+  ...userInfo,
+  score: userInfo.score ?? userInfo.todayScore ?? 0,
+})
+
 const mapUserData = (
   userInfo: APIResponse<UserInfos>,
   userActivity: APIResponse<UserActivity>,
   userAverageSession: APIResponse<UserAverageSession>,
   userPerformance: APIResponse<UserPerformance>,
 ): UserModel => ({
-  userInfos: userInfo.data,
+  userInfos: normalizeUserInfos(userInfo.data),
   userActivity: userActivity.data,
   userAverageSession: userAverageSession.data,
   userPerformance: userPerformance.data,
 })
 
-export const getUserData = async (userId: string): Promise<UserModel> => {
+export const getUserData = async (
+  userId: string,
+): Promise<UserModel | null> => {
   try {
     const [userInfo, userActivity, userAverageSession, userPerformance] =
       await Promise.all([
@@ -47,22 +54,34 @@ export const getUserData = async (userId: string): Promise<UserModel> => {
       )
     } else {
       // declare as array to be able to use find, and avoid TS error
-      userInfo.data = Array.isArray(userInfo)
-        ? userInfo.find((user: UserInfos) => user.id.toString() === userId)
+      const foundUserInfo: UserInfos = Array.isArray(userInfo)
+        ? userInfo.find(
+            (user: UserInfos): boolean => user.id.toString() === userId,
+          )
         : null
+
+      if (!foundUserInfo) {
+        console.error(`User with ID ${userId} not found`)
+        return null
+      }
+
+      userInfo.data = normalizeUserInfos(foundUserInfo)
+
       userActivity.data = Array.isArray(userActivity)
         ? userActivity.find(
-            (user: UserActivity) => user.userId.toString() === userId,
+            (user: UserActivity): boolean => user.userId.toString() === userId,
           )
         : null
       userAverageSession.data = Array.isArray(userAverageSession)
         ? userAverageSession.find(
-            (user: UserAverageSession) => user.userId.toString() === userId,
+            (user: UserAverageSession): boolean =>
+              user.userId.toString() === userId,
           )
         : null
       userPerformance.data = Array.isArray(userPerformance)
         ? userPerformance.find(
-            (user: UserPerformance) => user.userId.toString() === userId,
+            (user: UserPerformance): boolean =>
+              user.userId.toString() === userId,
           )
         : null
 
