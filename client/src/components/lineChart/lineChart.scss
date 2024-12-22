@@ -1,14 +1,13 @@
 #lineChart {
-  @media (max-width: 1024px) {
-    width: 12rem;
-    height: 12.5rem;
-  }
-
   width: 16rem;
   height: 16.5rem;
   background: #f00;
   border-radius: 5px;
   position: relative;
+  @media (max-width: 1440px) {
+    width: 12rem;
+    height: 12.5rem;
+  }
 }
 
 #lineChart h2 {

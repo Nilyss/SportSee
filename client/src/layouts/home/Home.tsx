@@ -92,7 +92,7 @@ export default function Home(): ReactElement {
           <ul>
             {user?.userInfos.keyData &&
               Object.entries(user.userInfos.keyData).map(
-                ([key, value]: [string, number]) => {
+                ([key, value]: [string, number]): ReactElement => {
                   return <Nutrition key={key} type={key} value={value} />
                 },
               )}

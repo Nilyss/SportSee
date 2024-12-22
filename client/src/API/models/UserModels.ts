@@ -5,7 +5,8 @@ export interface UserInfos {
     lastName: string
     age: number
   }
-  score: number
+  score?: number
+  todayScore?: number
   keyData: {
     calorieCount: number
     proteinCount: number

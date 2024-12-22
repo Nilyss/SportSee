@@ -29,7 +29,7 @@ export const UserProvider = ({
   ] = useState<UserModel | null>(null)
 
   const getUser = async (id: string): Promise<void> => {
-    const userData: UserModel = await getUserData(id)
+    const userData: UserModel | null = await getUserData(id)
     setUser(userData)
   }
 
